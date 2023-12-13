@@ -30,11 +30,9 @@ class Level extends Game {
 
     // Create platforms and add them to the game
     const platforms = [
-      new Platform(0, this.canvas.height - 20, platformWidth, 20),
-      new Platform(platformWidth + gap, this.canvas.height - 20, platformWidth, 20),
-      new Platform(2 * (platformWidth + gap), this.canvas.height - 20, platformWidth, 20),
-      new Platform(3 * (platformWidth + gap), this.canvas.height - 20, platformWidth, 20),
-      new Platform(4 * (platformWidth + gap), this.canvas.height - 20, platformWidth, 20),
+      new Platform(0, this.canvas.height - 400, platformWidth, 4000),
+      new Platform(platformWidth, this.canvas.height - 0, 4000, 900),
+      new Platform(5 * (platformWidth + gap), this.canvas.height - 400, platformWidth, 4000),
     ];
     for (const platform of platforms) {
       this.addGameObject(platform);
