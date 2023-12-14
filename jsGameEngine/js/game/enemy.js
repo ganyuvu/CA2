@@ -23,9 +23,9 @@ class Enemy extends GameObject {
 
     this.addComponent(new Animator(animations, 'run')); // The initial state is 'run'
     this.movementDistance = 0;
-    this.movementLimit = 10;
+    this.movementLimit = 4;
     this.movingRight = true;
-    this.eSpeed = 6;//Enemy speed
+    this.eSpeed = 3;//Enemy speed
   }
 
   update(deltaTime) {
