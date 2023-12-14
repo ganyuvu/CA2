@@ -1,52 +1,44 @@
-// Import the GameObject class from the 'engine' directory
 import GameObject from '../engine/gameobject.js';
-
-// Import the Renderer class from the 'engine' directory
 import Renderer from '../engine/renderer.js';
-
-// Import the Physics class from the 'engine' directory
+import Animator from '../engine/animator.js';
 import Physics from '../engine/physics.js';
-
-// Import the Images object from the 'engine' directory. This object contains all the game's image resources
 import {Images} from '../engine/resources.js';
-
-// Import the Player and Platform classes from the current directory
 import Player from './player.js';
 import Platform from './platform.js';
 
-// Define a new class, Enemy, which extends (i.e., inherits from) GameObject
 class Enemy extends GameObject {
-
-  // Define the constructor for this class, which takes two arguments for the x and y coordinates
   constructor(x, y) {
-    // Call the constructor of the superclass (GameObject) with the x and y coordinates
     super(x, y);
-    
-    // Add a Renderer component to this enemy, responsible for rendering it in the game.
-    // The renderer uses the color 'green', dimensions 50x50, and an enemy image from the Images object
-    this.addComponent(new Renderer('green', 50, 50, Images.enemy));
-    
-    // Add a Physics component to this enemy, responsible for managing its physical interactions
-    // Sets the initial velocity and acceleration
+    this.addComponent(new Renderer('green', 50, 50));
     this.addComponent(new Physics({ x: 50, y: 0 }, { x: 0, y: 0 }));
-    
-    // Initialize variables related to enemy's movement
+
+    // Define the animations for the enemy
+    const animations = {
+      'run': {
+        spriteSheet: Images.runEnemy, // The sprite sheet for the run animation
+        frameCount: 3, // The number of frames in the run animation
+        frameDuration: 0.1 // The duration of each frame in seconds
+      },
+    };
+
+    this.addComponent(new Animator(animations, 'run')); // The initial state is 'run'
     this.movementDistance = 0;
-    this.movementLimit = 130;
+    this.movementLimit = 10;
     this.movingRight = true;
+    this.eSpeed = 6;//Enemy speed
   }
 
-  // Define an update method that will run every frame of the game. It takes deltaTime as an argument
-  // which represents the time passed since the last frame
   update(deltaTime) {
     // Get the Physics component of this enemy
     const physics = this.getComponent(Physics);
+    // Get the Animator component of this enemy
+    const animator = this.getComponent(Animator);
 
     // Check if the enemy is moving to the right
     if (this.movingRight) {
       // If it hasn't reached its movement limit, make it move right
       if (this.movementDistance < this.movementLimit) {
-        physics.velocity.x = 50;
+        physics.velocity.x = this.eSpeed;
         this.movementDistance += Math.abs(physics.velocity.x) * deltaTime;
         this.getComponent(Renderer).gameObject.direction = 1;
       } else {
@@ -57,13 +49,17 @@ class Enemy extends GameObject {
     } else {
       // If it hasn't reached its movement limit, make it move left
       if (this.movementDistance < this.movementLimit) {
-        physics.velocity.x = -50;
+        physics.velocity.x = -this.eSpeed;
         this.movementDistance += Math.abs(physics.velocity.x) * deltaTime;
         this.getComponent(Renderer).gameObject.direction = -1;
       } else {
         // If it reached the limit, make it move right
         this.movingRight = true;
         this.movementDistance = 0;
+      }
+
+      if (this.movingRight || !this.movingRight) {
+        animator.setState('run');
       }
     }
 

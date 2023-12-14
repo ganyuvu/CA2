@@ -2,7 +2,7 @@
 const Images = {
   idlePlayer: new Image(), // The Image instance for the idle player.
   runPlayer: new Image(), // The Image instance for the running player.
-  enemy: new Image(), // The Image instance for the enemy.
+  runEnemy: new Image(), // The Image instance for the enemy.
 };
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
@@ -18,7 +18,7 @@ Images.idlePlayer.src = './resources/images/player/idlePlayer.png'; // Update th
 Images.runPlayer.src = './resources/images/player/runPlayer.png'; // Update the image path
 
 // Set the source of the enemy image.
-Images.enemy.src = './resources/images/enemy/enemy.png'; // Update the image path
+Images.runEnemy.src = './resources/images/enemy/runEnemy.png'; // Update the image path
 
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
 export { Images, AudioFiles };

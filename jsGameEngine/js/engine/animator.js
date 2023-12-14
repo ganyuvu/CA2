@@ -16,13 +16,12 @@ class Animator extends Component {
   setState(state) {
     if (this.animations.hasOwnProperty(state)) {
       this.currentState = state;
-      this.currentFrame = 0;
-      this.elapsedTime = 0;
     } else {
       console.error(`Invalid state: ${state}`);
     }
   }
 
+  // Returns the current frame of the current animation
   getCurrentFrame() {
     const animation = this.animations[this.currentState];
     const frameWidth = animation.spriteSheet.width / animation.frameCount;
@@ -46,7 +45,6 @@ class Animator extends Component {
     const animation = this.animations[this.currentState]; // Gets the current animation
     this.elapsedTime += deltaTime; // Adds the time that has passed since the last frame change to the elapsed time
 
-    // If the elapsed time is greater than or equal to the frame duration, change the frame
     // If the elapsed time is greater than or equal to the frame duration, change the frame
     if (this.elapsedTime >= animation.frameDuration) {
       this.currentFrame = (this.currentFrame + 1) % animation.frameCount; // Goes back to the first frame after the last frame

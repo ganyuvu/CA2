@@ -15,7 +15,7 @@ class Player extends GameObject {
   // Constructor initializes the game object and add necessary components
   constructor(x, y) {
     super(x, y); // Call parent's constructor
-    this.renderer = new Renderer('blue', 65, 65, Images.idlePlayer); // Add renderer
+    this.renderer = new Renderer('blue', 45, 45); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
@@ -24,12 +24,12 @@ class Player extends GameObject {
       'idle': {
         spriteSheet: Images.idlePlayer, // Replace with your idle sprite sheet
         frameCount: 2,
-        frameDuration: 3
+        frameDuration: 0.8
       },
       'run': {
         spriteSheet: Images.runPlayer, // Replace with your run sprite sheet
         frameCount: 4,
-        frameDuration: 3
+        frameDuration: 0.2
       }
     };
 

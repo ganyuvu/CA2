@@ -6,7 +6,7 @@ import Renderer from './renderer.js';
 // The Physics class extends Component and handles the physics behavior of a game object.
 class Physics extends Component {
   // The constructor initializes the physics component with optional initial velocity, acceleration, and gravity.
-  constructor(velocity = { x: 0, y: 0 }, acceleration = { x: 0, y: 0 }, gravity = { x: 0, y: 10 }) {
+  constructor(velocity = { x: 0, y: 0 }, acceleration = { x: 0, y: 0 }, gravity = { x: 0, y: 6 }) {
     super(); // Call the parent constructor.
     this.velocity = velocity; // Initialize the velocity.
     this.acceleration = acceleration; // Initialize the acceleration.
@@ -18,9 +18,6 @@ class Physics extends Component {
     // Update velocity based on acceleration and gravity.
     this.velocity.x += this.acceleration.x * deltaTime;
     this.velocity.y += (this.acceleration.y + this.gravity.y) * deltaTime;
-    // Move the game object based on the velocity.
-    // this.gameObject.x += this.velocity.x * deltaTime;
-    // this.gameObject.y += this.velocity.y * deltaTime;
 
     //Copilot helped me with the code below
 
