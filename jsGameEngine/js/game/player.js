@@ -13,12 +13,13 @@ import ParticleSystem from '../engine/particleSystem.js';
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
   // Constructor initializes the game object and add necessary components
-  constructor(x, y) {
+  constructor(x, y, startingPlatform) {
     super(x, y); // Call parent's constructor
     this.renderer = new Renderer('blue', 45, 45); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
+    this.startingPlatform = startingPlatform; 
 
     const animations = {
       'idle': {
@@ -56,6 +57,15 @@ class Player extends GameObject {
   update(deltaTime) {
     const physics = this.getComponent(Physics); // Get physics component
     const input = this.getComponent(Input); // Get input component
+    const isOnStartingPlatform = Math.abs(this.y - (this.startingPlatform.y - this.height)) < 5; // Check if player is on the starting platform
+    this.isOnStartingPlatform = isOnStartingPlatform; // Check if player is on the starting platform
+    
+    // Check if player has collected all collectibles
+    if (this.score === 1 && this.isOnStartingPlatform) {
+      console.log('You win!');
+      location.reload();
+    }
+
 
     // Update the Animator
     if (this.animator) {
@@ -109,20 +119,6 @@ class Player extends GameObject {
       }
     }
   
-    // Handle collisions with platforms
-    // this.isOnPlatform = false;  // Reset this before checking collisions with platforms
-    // const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
-    // for (const platform of platforms) {
-    //   if (physics.isColliding(platform.getComponent(Physics))) {
-    //     if (!this.isJumping) {
-    //       physics.velocity.y = 0;
-    //       physics.acceleration.y = 0;
-    //       this.y = platform.y - this.renderer.height;
-    //       this.isOnPlatform = true;
-    //     }
-    //   }
-    // }
-  
     // Check if player has fallen off the bottom of the screen
     if (this.y > this.game.canvas.height) {
       this.resetPlayerState();
@@ -130,12 +126,6 @@ class Player extends GameObject {
 
     // Check if player has no lives left
     if (this.lives <= 0) {
-      location.reload();
-    }
-
-    // Check if player has collected all collectibles
-    if (this.score >= 3) {
-      console.log('You win!');
       location.reload();
     }
 

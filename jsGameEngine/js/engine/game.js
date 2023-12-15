@@ -1,9 +1,6 @@
-// This class depends on the Camera, which is a separate module and needs to be imported.
 import Camera from './camera.js';
 
-// The Game class is responsible for setting up and managing the main game loop.
 class Game {
-  // The constructor initializes a new instance of the Game class.
   constructor(canvasId) {
     // The canvas HTML element where the game will be drawn.
     this.canvas = document.getElementById(canvasId);
