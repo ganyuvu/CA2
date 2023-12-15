@@ -15,11 +15,11 @@ class Level extends Game {
     const gap = 100;
 
     //The starting platform 
-    const startingPlatform = new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan');
-    this.addGameObject(startingPlatform);
+     //const startingPlatform = new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan');
+     //this.addGameObject(startingPlatform);
 
     // Create a player object and add it to the game
-    const player = new Player(this.canvas.width / 2 - 25, this.canvas.height / 2 - 25, startingPlatform);
+    const player = new Player(this.canvas.width / 2 - 25, this.canvas.height / 2 - 25);
     this.addGameObject(player);
     
     // Add the player UI object to the game
@@ -30,6 +30,7 @@ class Level extends Game {
 
     const platforms = [
       //platforms on the left
+      new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan'),
       new Platform(this.canvas.width / 2 + gap * 2, this.canvas.height / 1.59, platformWidth * 3, 25), // longer platform
       new Platform(this.canvas.width / 2 + gap * 4, this.canvas.height / 1.78 - gap, platformWidth, 25), // Wider gap
       new Platform(this.canvas.width / 2 + gap * 7, this.canvas.height / 2.8 - gap, platformWidth, 25), 
@@ -54,6 +55,10 @@ class Level extends Game {
       this.addGameObject(platform);
     }
 
+    // Creating an infinite platform and add it to the game
+    this.infinitePlatform = new Platform(this.canvas.width / 10, this.canvas.height / 2 - gap * -5, platformWidth * 2000, 25);
+    this.addGameObject(this.infinitePlatform);
+
     // Create enemies and add them to the game
     this.addGameObject(new Enemy(this.canvas.width / 2 - platformWidth - gap * 3.7, this.canvas.height / 1.65, platformWidth * 1.5, 25));
     this.addGameObject(new Enemy(this.canvas.width / 2 + gap * 2, this.canvas.height / 1.59, platformWidth * 4, 25));
@@ -63,6 +68,19 @@ class Level extends Game {
     // this.addGameObject(new Collectible(2780, this.canvas.height - 50, 20, 20));
     this.addGameObject(new Collectible(450, this.canvas.height - 100, 20, 20));
     // this.addGameObject(new Collectible(650, this.canvas.height - 100, 20, 20));
+  }
+
+  update(deltaTime) {
+    // Move the infinite platform to the left
+    this.infinitePlatform.x -= 5;
+
+    // If the infinite platform has moved off the screen, reset its position to the right side of the screen
+    if (this.infinitePlatform.x + this.infinitePlatform.width < 0) {
+      this.infinitePlatform.x = this.canvas.width;
+    }
+
+    // Call the superclass's update method to update the rest of the game objects
+    super.update(deltaTime);
   }
   
 }

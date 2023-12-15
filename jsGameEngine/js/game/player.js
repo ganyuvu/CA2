@@ -13,13 +13,13 @@ import ParticleSystem from '../engine/particleSystem.js';
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
   // Constructor initializes the game object and add necessary components
-  constructor(x, y, startingPlatform) {
+  constructor(x, y) {
     super(x, y); // Call parent's constructor
     this.renderer = new Renderer('blue', 45, 45); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
-    this.startingPlatform = startingPlatform; 
+    //this.startingPlatform = startingPlatform; 
 
     const animations = {
       'idle': {
@@ -57,15 +57,13 @@ class Player extends GameObject {
   update(deltaTime) {
     const physics = this.getComponent(Physics); // Get physics component
     const input = this.getComponent(Input); // Get input component
-    const isOnStartingPlatform = Math.abs(this.y - (this.startingPlatform.y - this.height)) < 5; // Check if player is on the starting platform
-    this.isOnStartingPlatform = isOnStartingPlatform; // Check if player is on the starting platform
-    
+    // const isOnStartingPlatform = Math.abs(this.y - (this.startingPlatform.y - this.height)) < 5; // Check if player is on the starting platform
+    // this.isOnStartingPlatform = isOnStartingPlatform; // Check if player is on the starting platform
     // Check if player has collected all collectibles
-    if (this.score === 1 && this.isOnStartingPlatform) {
+    if (this.score ===1) {
       console.log('You win!');
       location.reload();
     }
-
 
     // Update the Animator
     if (this.animator) {
@@ -119,10 +117,10 @@ class Player extends GameObject {
       }
     }
   
-    // Check if player has fallen off the bottom of the screen
-    if (this.y > this.game.canvas.height) {
-      this.resetPlayerState();
-    }
+    // // Check if player has fallen off the bottom of the screen
+    // if (this.y > this.game.canvas.height) {
+    //   this.resetPlayerState();
+    // }
 
     // Check if player has no lives left
     if (this.lives <= 0) {
@@ -210,17 +208,17 @@ class Player extends GameObject {
     this.game.addGameObject(particleSystem);
   }
 
-  resetPlayerState() {
-    // Reset the player's state, repositioning it and nullifying movement
-    this.x = this.game.canvas.width / 2;
-    this.y = this.game.canvas.height / 2;
-    this.getComponent(Physics).velocity = { x: 0, y: 0 };
-    this.getComponent(Physics).acceleration = { x: 0, y: 0 };
-    this.direction = 1;
-    this.isOnPlatform = false;
-    this.isJumping = false;
-    this.jumpTimer = 0;
-  }
+  // resetPlayerState() {
+  //   // Reset the player's state, repositioning it and nullifying movement
+  //   this.x = this.game.canvas.width / 2;
+  //   this.y = this.game.canvas.height / 2;
+  //   this.getComponent(Physics).velocity = { x: 0, y: 0 };
+  //   this.getComponent(Physics).acceleration = { x: 0, y: 0 };
+  //   this.direction = 1;
+  //   this.isOnPlatform = false;
+  //   this.isJumping = false;
+  //   this.jumpTimer = 0;
+  // }
 
   resetGame() {
     // Reset the game state, which includes the player's state
