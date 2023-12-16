@@ -14,3 +14,35 @@ body {
 canvas {
     border: 1px solid #fff; /* 1 pixel solid white border */
 }
+
+#death-Screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(97, 2, 2, 0.5);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center; /* Add this line to center the text horizontally */
+    justify-content: flex-start;
+    padding-top: 17%;
+}
+#death-Screen h1 {
+    color: white; 
+}
+#death-Screen button {
+    width: 200px; 
+    height: 50px; 
+    background-color: darkred; 
+    color: white; 
+}
+#death-Screen button:hover {
+    /* The background color when the button is hovered */
+    background-color: red;
+}
+  

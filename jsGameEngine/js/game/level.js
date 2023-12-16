@@ -26,12 +26,20 @@ class Level extends Game {
       new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan', true),
 
       //platforms on the left
-      new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan'),
-      new Platform(this.canvas.width / 2 + gap * 2, this.canvas.height / 1.59, platformWidth * 3, 25), // longer platform
-      new Platform(this.canvas.width / 2 + gap * 4, this.canvas.height / 1.78 - gap, platformWidth, 25), // Wider gap
+      new Platform(this.canvas.width / 2 + gap * 2, this.canvas.height / 1.59, platformWidth * 3, 25), 
+      new Platform(this.canvas.width / 2 + gap * 4, this.canvas.height / 1.78 - gap, platformWidth, 25), 
       new Platform(this.canvas.width / 2 + gap * 7, this.canvas.height / 2.8 - gap, platformWidth, 25), 
       new Platform(this.canvas.width / 2 + gap * 12, this.canvas.height / 4 - gap, platformWidth, 25), 
-      new Platform(this.canvas.width / 2 + gap * 14, this.canvas.height / 2 - gap * 0.3, platformWidth *1, 25), 
+      new Platform(this.canvas.width / 2 + gap * 17, this.canvas.height / 5 - gap, platformWidth* 0.5, 25),
+      new Platform(this.canvas.width / 2 + gap * 16, this.canvas.height / 2 - gap * 1.4, platformWidth* 0.3, 25), 
+      new Platform(this.canvas.width / 2 + gap * 19.4, this.canvas.height / 2 - gap * 4, platformWidth* 0.3, 25), 
+      new Platform(this.canvas.width / 2 + gap * 14, this.canvas.height / 2 - gap, platformWidth *1, 25), 
+      new Platform(this.canvas.width / 2 + gap * 24, this.canvas.height / 2 - gap * 4, platformWidth, 25), 
+      new Platform(this.canvas.width / 2 + gap * 27, this.canvas.height / 2 - gap * 5.3, platformWidth*0.5, 25), 
+      new Platform(this.canvas.width / 2 + gap * 27.7, this.canvas.height / 2 - gap * 6.8, platformWidth*0.5, 25),
+      new Platform(this.canvas.width / 2 + gap * 27, this.canvas.height / 2 - gap * 8.2, platformWidth*0.5, 25), 
+      new Platform(this.canvas.width / 2 + gap * 27.7, this.canvas.height / 2 - gap * 9.7, platformWidth*0.5, 25), 
+      new Platform(this.canvas.width / 2 + gap * 32, this.canvas.height / 2 - gap * 10, platformWidth*1.5, 25), 
       new Platform(this.canvas.width / 2 + gap * 16, this.canvas.height / 2 - gap * -2.3, platformWidth, 25), 
       new Platform(this.canvas.width / 2 + gap * 13, this.canvas.height / 2 - gap * -1, platformWidth * 0.5, 25), 
       new Platform(this.canvas.width / 2 + gap * 20, this.canvas.height / 2 - gap * -3.3, platformWidth * 0.5, 25),
@@ -42,9 +50,7 @@ class Level extends Game {
       new Platform(this.canvas.width / 2 - platformWidth - gap * 6, this.canvas.height / 2 - gap * 2, platformWidth, 25, 'red'), // Wider gap, lower position
       new Platform(this.canvas.width / 2 - platformWidth - gap * 3.7, this.canvas.height / 1.65, platformWidth * 1.5, 25), // Longer platform
       new Platform(this.canvas.width / 2 - platformWidth - gap * 10, this.canvas.height / 2 - gap * 4, platformWidth * 2, 25), // Wider gap, longer platform
-      new Platform(this.canvas.width / 2 + gap * 19, this.canvas.height / 2 - gap * 3, platformWidth, 25), // Wider gap
       new Platform(this.canvas.width / 2 - platformWidth - gap * 12, this.canvas.height / 2 - gap * 5, platformWidth * 1.5, 25), // Wider gap, lower position, longer platform
-      new Platform(this.canvas.width / 2 + gap * 24, this.canvas.height / 2 - gap * 4, platformWidth, 25), // Wider gap
     ];
 
     for (const platform of platforms) {
@@ -61,11 +67,11 @@ class Level extends Game {
     // Create enemies and add them to the game
     this.addGameObject(new Enemy(this.canvas.width / 2 - platformWidth - gap * 3.7, this.canvas.height / 1.65, platformWidth * 1.5, 25));
     this.addGameObject(new Enemy(this.canvas.width / 2 + gap * 2, this.canvas.height / 1.59, platformWidth * 4, 25));
-    this.addGameObject(new Enemy(this.canvas.width / 2 + gap * 14, this.canvas.height / 2 - gap * 0.8, platformWidth, 25));
+    this.addGameObject(new Enemy(this.canvas.width / 2 + gap * 4.6, this.canvas.height / 1.59, platformWidth * 4, 25));
 
     // Create collectibles and add them to the game
-    this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
-    this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
+    this.addGameObject(new Collectible(2785, 740 - 100, 20, 20));
+    this.addGameObject(new Collectible(4100, -610 -100, 20, 20));
     this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
     this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
   }

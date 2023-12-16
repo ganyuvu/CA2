@@ -18,7 +18,7 @@ class PlayerUI extends GameObject {
     const player = this.game.gameObjects.find((obj) => obj instanceof Player);
 
     // Update the text of the UI component to reflect the player's current lives and score.
-    this.uiComponent.setText(`Lives: ${player.lives} Score: ${player.score}`);
+    this.uiComponent.setText(`Lives: ${player.lives} Score: ${player.score} Time: ${Math.max(0, Math.floor(player.countdown))}s`);
   }
 }
 

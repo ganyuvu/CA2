@@ -47,77 +47,90 @@ class Player extends GameObject {
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
     this.pSpeed = 5;//Player speed
+    this.countdown = 10;
+    this.stopGame= false; //this is for pausing the game
   }
 
   // The update function runs every frame and contains game logic
   update(deltaTime) {
-    const physics = this.getComponent(Physics); // Get physics component
-    const win = physics.Win;//Win variable
-    const input = this.getComponent(Input); // Get input component
+    if(this.stopGame == false)
+    {
+      this.countdown -= deltaTime;
+      const physics = this.getComponent(Physics); // Get physics component
+      const win = physics.Win;//Win variable
+      const input = this.getComponent(Input); // Get input component
 
-    // Update the Animator
-    if (this.animator) {
-      this.animator.update(deltaTime);
-      const frame = this.animator.getCurrentFrame();
-      this.renderer.sourceX = frame.x;
-      this.renderer.sourceY = frame.y;
-      this.renderer.sourceWidth = frame.width;
-      this.renderer.sourceHeight = frame.height;
-    }
+      //copilot helped here
+      let deathScreen = document.createElement('div');
+        deathScreen.id = 'death-Screen';
+        deathScreen.style.display = 'none';
+        deathScreen.innerHTML = '<h1>GAME OVER!</h1><button onclick="location.reload()">Play Again</button>';
+        document.body.appendChild(deathScreen);
 
-    this.handleGamepadInput(input);
+        if(this.lives == 0 || this.countdown <= 0){
+          document.getElementById('death-Screen').style.display = 'block';
+          this.stopGame = true;
+        }
+
+      // Update the Animator - copilot helped here
+      if (this.animator) {
+        this.animator.update(deltaTime);
+        const frame = this.animator.getCurrentFrame();
+        this.renderer.sourceX = frame.x;
+        this.renderer.sourceY = frame.y;
+        this.renderer.sourceWidth = frame.width;
+        this.renderer.sourceHeight = frame.height;
+      }
+
+      this.handleGamepadInput(input);
+      
+      // Handle player movement
+      if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
+        physics.velocity.x = this.pSpeed;
+        this.direction = 1;
+        this.animator.setState('run');
+      } else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
+        physics.velocity.x = -this.pSpeed;
+        this.direction = -1;
+        this.animator.setState('run');
+      } else if (!this.isGamepadMovement) {
+        physics.velocity.x = 0;
+        this.animator.setState('idle');
+      }
+
+      // Handle player jumping
+      if (!this.isGamepadJump && input.isKeyDown('ArrowUp')) {
+        this.startJump();
+      }
+
+      if (this.isJumping) {
+        this.updateJump(deltaTime);
+      }
+
+      // Handle collisions with collectibles
+      const collectibles = this.game.gameObjects.filter((obj) => obj instanceof Collectible); 
+      for (const collectible of collectibles) {
+        if (physics.isColliding(collectible.getComponent(Physics))) {
+          this.collect(collectible);
+          this.game.removeGameObject(collectible);
+        }
+      }
     
-    // Handle player movement
-    if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
-      physics.velocity.x = this.pSpeed;
-      this.direction = 1;
-      this.animator.setState('run');
-    } else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
-      physics.velocity.x = -this.pSpeed;
-      this.direction = -1;
-      this.animator.setState('run');
-    } else if (!this.isGamepadMovement) {
-      physics.velocity.x = 0;
-      this.animator.setState('idle');
-    }
-
-    // Handle player jumping
-    if (!this.isGamepadJump && input.isKeyDown('ArrowUp')) {
-      this.startJump();
-    }
-
-    if (this.isJumping) {
-      this.updateJump(deltaTime);
-    }
-
-    // Handle collisions with collectibles
-    const collectibles = this.game.gameObjects.filter((obj) => obj instanceof Collectible); 
-    for (const collectible of collectibles) {
-      if (physics.isColliding(collectible.getComponent(Physics))) {
-        this.collect(collectible);
-        this.game.removeGameObject(collectible);
+      // Handle collisions with enemies
+      const enemies = this.game.gameObjects.filter((obj) => obj instanceof Enemy);
+      for (const enemy of enemies) {
+        if (physics.isColliding(enemy.getComponent(Physics))) {
+          this.collidedWithEnemy();
+        }
       }
-    }
-  
-    // Handle collisions with enemies
-    const enemies = this.game.gameObjects.filter((obj) => obj instanceof Enemy);
-    for (const enemy of enemies) {
-      if (physics.isColliding(enemy.getComponent(Physics))) {
-        this.collidedWithEnemy();
+
+      if (this.score >= 3 && win == true) {
+        this.resetGame();
       }
-    }
 
-    if (this.score >= 3 && win == true) {
-      this.resetGame();
-    }
-
-    // Check if player has no lives left
-    if (this.lives <= 0) {
-      this.resetGame();
-    }
-
-    super.update(deltaTime);
+      super.update(deltaTime);
   }
+}
 
   handleGamepadInput(input){
     const gamepad = input.getGamepad(); // Get the gamepad input
