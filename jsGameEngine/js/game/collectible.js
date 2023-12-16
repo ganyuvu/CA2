@@ -17,5 +17,4 @@ class Collectible extends GameObject {
   }
 }
 
-// Export the Collectible class as the default export of this module
 export default Collectible;

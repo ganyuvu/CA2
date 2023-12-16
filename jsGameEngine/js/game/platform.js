@@ -3,7 +3,7 @@ import Renderer from '../engine/renderer.js';
 import Physics from '../engine/physics.js';
 
 class Platform extends GameObject {
-  constructor(x, y, width, height, color = 'black') {
+  constructor(x, y, width, height, color = 'black', isStartingPlatform = false) {
     super(x, y);
 
     // The Renderer component is responsible for rendering the platform on the canvas
@@ -15,6 +15,8 @@ class Platform extends GameObject {
     
     // Set the tag property to 'platform'. This can be used to identify platforms later in the game logic
     this.tag = 'platform'; 
+
+    this.isStartingPlatform = isStartingPlatform;
   }
 }
 

@@ -22,6 +22,8 @@ class Physics extends Component {
     //Copilot helped me with the code below
 
     const platforms = this.gameObject.game.gameObjects.filter((obj) => obj instanceof Platform); // Get all platforms in the game
+    //Win Variable
+    this.Win = false;
 
     this.IsGrounded = false;
     
@@ -46,6 +48,11 @@ class Physics extends Component {
             this.IsGrounded = true;
             this.velocity.y = 0;
           }
+          if(obj.isStartingPlatform)
+            {
+              this.Win = true;
+              //console.log("You Win");
+            }
         }
       }
     }

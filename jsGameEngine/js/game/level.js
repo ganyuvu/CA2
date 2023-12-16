@@ -14,21 +14,17 @@ class Level extends Game {
     const platformWidth = 200;
     const gap = 100;
 
-    //The starting platform 
-     //const startingPlatform = new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan');
-     //this.addGameObject(startingPlatform);
-
     // Create a player object and add it to the game
     const player = new Player(this.canvas.width / 2 - 25, this.canvas.height / 2 - 25);
     this.addGameObject(player);
-    
-    // Add the player UI object to the game
-    this.addGameObject(new PlayerUI(10, 10));
 
     // Set the game's camera target to the player
     this.camera.target = player;
 
     const platforms = [
+      //Starting platform
+      new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan', true),
+
       //platforms on the left
       new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan'),
       new Platform(this.canvas.width / 2 + gap * 2, this.canvas.height / 1.59, platformWidth * 3, 25), // longer platform
@@ -55,6 +51,9 @@ class Level extends Game {
       this.addGameObject(platform);
     }
 
+    // Add the player UI object to the game
+    this.addGameObject(new PlayerUI(10, 10));
+
     // Creating an infinite platform and add it to the game
     this.infinitePlatform = new Platform(this.canvas.width / 10, this.canvas.height / 2 - gap * -5, platformWidth * 2000, 25);
     this.addGameObject(this.infinitePlatform);
@@ -65,9 +64,10 @@ class Level extends Game {
     this.addGameObject(new Enemy(this.canvas.width / 2 + gap * 14, this.canvas.height / 2 - gap * 0.8, platformWidth, 25));
 
     // Create collectibles and add them to the game
-    // this.addGameObject(new Collectible(2780, this.canvas.height - 50, 20, 20));
-    this.addGameObject(new Collectible(450, this.canvas.height - 100, 20, 20));
-    // this.addGameObject(new Collectible(650, this.canvas.height - 100, 20, 20));
+    this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
+    this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
+    this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
+    this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
   }
 
   update(deltaTime) {
