@@ -5,6 +5,7 @@ import Physics from '../engine/physics.js';
 import Animator from '../engine/animator.js';
 import Input from '../engine/input.js';
 import { Images } from '../engine/resources.js';
+import { AudioFiles } from '../engine/resources.js';
 import Enemy from './enemy.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
@@ -51,6 +52,10 @@ class Player extends GameObject {
     this.pSpeed = 5;//Player speed
     this.countdown = 180;
     this.stopGame= false; //this is for pausing the game
+    this.jumpingSound = AudioFiles.jump;
+    this.collectingSound = AudioFiles.collect;
+    this.winningSound = AudioFiles.win;
+    this.losingSound = AudioFiles.lose;
   }
 
   update(deltaTime) {
@@ -105,6 +110,7 @@ class Player extends GameObject {
       // Handle player jumping
       if (!this.isGamepadJump && input.isKeyDown('ArrowUp')) {
         this.startJump();
+        this.jumpingSound.play();
       }
 
       if (this.isJumping) {
@@ -116,6 +122,7 @@ class Player extends GameObject {
       for (const collectible of collectibles) {
         if (physics.isColliding(collectible.getComponent(Physics))) {
           this.collect(collectible);
+          this.collectingSound.play();
           this.game.removeGameObject(collectible);
         }
       }
@@ -130,12 +137,14 @@ class Player extends GameObject {
       // If the player has 4 points and is on the starting platform, display the win screen
       if (this.score >= 4 && win == true) {
         document.getElementById('win-Screen').style.display = 'block';
+        this.winningSound.play();
         this.stopGame = true;
       }
 
       // If the player has no lives left or the countdown reaches 0, display the death screen
       if(this.lives == 0 || this.countdown <= 0){
         document.getElementById('death-Screen').style.display = 'block';
+        this.losingSound.play();
         this.stopGame = true;
       }
 

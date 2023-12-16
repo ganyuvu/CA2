@@ -7,10 +7,17 @@ const Images = {
 
 // Create an AudioFiles object to hold the file paths of the audio resources.
 const AudioFiles = {
-  jump: './resources/audio/jump.mp3', // The file path of the jump sound.
-  collect: './resources/audio/collect.mp3', // The file path of the collect sound.
-  // Add more audio file paths as needed
+  jump: new Audio(),
+  collect: new Audio(),
+  win: new Audio(),
+  lose: new Audio(),
 };
+
+// Set the source of the audio files.
+AudioFiles.jump.src = './resources/Audio/jumpSound1.mp3';
+AudioFiles.collect.src = './resources/Audio/coinSound.mp3';
+AudioFiles.win.src = './resources/Audio/winSound.mp3';
+AudioFiles.lose.src = './resources/Audio/loseSound.mp3';
 
 // Set the source of the player image.
 //Images.player.src = './resources/images/player/player.png'; // Update the image path
