@@ -33,7 +33,7 @@ class Level extends Game {
       new Platform(this.canvas.width / 2 + gap * 17, this.canvas.height / 5 - gap, platformWidth* 0.5, 25),
       new Platform(this.canvas.width / 2 + gap * 16, this.canvas.height / 2 - gap * 1.4, platformWidth* 0.3, 25), 
       new Platform(this.canvas.width / 2 + gap * 19.4, this.canvas.height / 2 - gap * 4, platformWidth* 0.3, 25), 
-      new Platform(this.canvas.width / 2 + gap * 14, this.canvas.height / 2 - gap, platformWidth *1, 25), 
+      new Platform(this.canvas.width / 2 + gap * 14, this.canvas.height / 2 - gap*0.1, platformWidth, 25, 'red'), 
       new Platform(this.canvas.width / 2 + gap * 24, this.canvas.height / 2 - gap * 4, platformWidth, 25), 
       new Platform(this.canvas.width / 2 + gap * 27, this.canvas.height / 2 - gap * 5.3, platformWidth*0.5, 25), 
       new Platform(this.canvas.width / 2 + gap * 27.7, this.canvas.height / 2 - gap * 6.8, platformWidth*0.5, 25),

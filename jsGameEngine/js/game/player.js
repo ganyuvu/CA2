@@ -11,20 +11,22 @@ import ParticleSystem from '../engine/particleSystem.js';
 
 class Player extends GameObject {
   constructor(x, y) {
-    super(x, y); // Call parent's constructor
+    super(x, y); 
     this.renderer = new Renderer('blue', 45, 45); // Add renderer
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
 
+    //Copilot helped me with animation
+    // Defines the animations for the player
     const animations = {
       'idle': {
-        spriteSheet: Images.idlePlayer, // Replace with your idle sprite sheet
+        spriteSheet: Images.idlePlayer, 
         frameCount: 2,
         frameDuration: 0.8
       },
       'run': {
-        spriteSheet: Images.runPlayer, // Replace with your run sprite sheet
+        spriteSheet: Images.runPlayer, 
         frameCount: 4,
         frameDuration: 0.2
       }
@@ -47,11 +49,10 @@ class Player extends GameObject {
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
     this.pSpeed = 5;//Player speed
-    this.countdown = 10;
+    this.countdown = 180;
     this.stopGame= false; //this is for pausing the game
   }
 
-  // The update function runs every frame and contains game logic
   update(deltaTime) {
     if(this.stopGame == false)
     {
@@ -61,16 +62,19 @@ class Player extends GameObject {
       const input = this.getComponent(Input); // Get input component
 
       //copilot helped here
+      // Creating a win screen - connected to css file
+      let winScreen = document.createElement('div');
+        winScreen.id = 'win-Screen';
+        winScreen.style.display = 'none';
+        winScreen.innerHTML = '<h1>YOU WON!</h1><button onclick="location.reload()">Play Again</button>';
+        document.body.appendChild(winScreen);
+
+      // Creating a death screen - connected to css file
       let deathScreen = document.createElement('div');
         deathScreen.id = 'death-Screen';
         deathScreen.style.display = 'none';
         deathScreen.innerHTML = '<h1>GAME OVER!</h1><button onclick="location.reload()">Play Again</button>';
         document.body.appendChild(deathScreen);
-
-        if(this.lives == 0 || this.countdown <= 0){
-          document.getElementById('death-Screen').style.display = 'block';
-          this.stopGame = true;
-        }
 
       // Update the Animator - copilot helped here
       if (this.animator) {
@@ -123,9 +127,16 @@ class Player extends GameObject {
           this.collidedWithEnemy();
         }
       }
+      // If the player has 4 points and is on the starting platform, display the win screen
+      if (this.score >= 4 && win == true) {
+        document.getElementById('win-Screen').style.display = 'block';
+        this.stopGame = true;
+      }
 
-      if (this.score >= 3 && win == true) {
-        this.resetGame();
+      // If the player has no lives left or the countdown reaches 0, display the death screen
+      if(this.lives == 0 || this.countdown <= 0){
+        document.getElementById('death-Screen').style.display = 'block';
+        this.stopGame = true;
       }
 
       super.update(deltaTime);
