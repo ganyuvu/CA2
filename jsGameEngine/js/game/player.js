@@ -50,7 +50,7 @@ class Player extends GameObject {
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
     this.pSpeed = 5;//Player speed
-    this.countdown = 180;
+    this.countdown = 120;
     this.stopGame= false; //this is for pausing the game
     this.jumpingSound = AudioFiles.jump;
     this.collectingSound = AudioFiles.collect;
@@ -64,6 +64,7 @@ class Player extends GameObject {
       this.countdown -= deltaTime;
       const physics = this.getComponent(Physics); // Get physics component
       const win = physics.Win;//Win variable
+      const Dead = physics.Dead;//Win variable
       const input = this.getComponent(Input); // Get input component
 
       //copilot helped here
@@ -143,6 +144,12 @@ class Player extends GameObject {
 
       // If the player has no lives left or the countdown reaches 0, display the death screen
       if(this.lives == 0 || this.countdown <= 0){
+        document.getElementById('death-Screen').style.display = 'block';
+        this.losingSound.play();
+        this.stopGame = true;
+      }
+      // If the player falls off any platform and hits the floor, display the death screen
+      if(Dead == true){
         document.getElementById('death-Screen').style.display = 'block';
         this.losingSound.play();
         this.stopGame = true;

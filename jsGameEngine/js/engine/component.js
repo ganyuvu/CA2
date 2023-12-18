@@ -1,15 +1,8 @@
-// This class represents a Component which is usually a reusable and attachable unit of game behavior.
 class Component {
-    // The constructor initializes a new instance of the Component class. 
     constructor() {
-      // The gameObject property references the object that this component is attached to.
-      // Initially, it is set to null.
       this.gameObject = null;
     }
-  
-    // The update method is typically called once per game update cycle (or frame). 
-    // Here, it's empty and likely intended to be overridden by subclasses to include custom behavior.
-    // deltaTime represents the amount of time passed since the last update. This is commonly used in movement calculations.
+    // The init method is called when the component is added to a game object.
     update(deltaTime) {
     }
     

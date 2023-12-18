@@ -1,4 +1,3 @@
-// The required modules and classes are imported at the top of the script.
 import GameObject from '../engine/gameobject.js';
 import Renderer from '../engine/renderer.js';
 import Physics from '../engine/physics.js';

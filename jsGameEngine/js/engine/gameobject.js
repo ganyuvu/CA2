@@ -1,8 +1,5 @@
 // This class represents a GameObject which is an entity in your game.
 class GameObject {
-    // The constructor initializes a new instance of the GameObject class.
-    // The x and y parameters represent the position of the GameObject. 
-    // They default to 0 if not provided when the object is created.
     constructor(x = 0, y = 0) {
       // The x-coordinate of the GameObject's position.
       this.x = x;

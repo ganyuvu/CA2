@@ -15,42 +15,55 @@ class Level extends Game {
     const gap = 100;
 
     // Create a player object and add it to the game
-    const player = new Player(this.canvas.width / 2 - 25, this.canvas.height / 2 - 25);
+    //const player = new Player(this.canvas.width / 2 - 25, this.canvas.height / 2 - 25);
+    const player = new Player(720, 320, 200, 20);
     this.addGameObject(player);
 
     // Set the game's camera target to the player
     this.camera.target = player;
 
     const platforms = [
-      //Starting platform
-      new Platform(this.canvas.width / 2 - platformWidth / 2, this.canvas.height / 2 + gap * 2, platformWidth, 20, 'darkcyan', true),
+      new Platform(5000, -6000, 2000, 10000),//right wall
+      new Platform(-4000, -6000, 2000, 10000),//left wall
+      new Platform(-2000, 850, 7000, 1000,'black',false, true),//floor
 
+      //Starting platform
+      new Platform(640, 540, 200, 20, 'darkcyan', true, false),
       //platforms on the left
-      new Platform(this.canvas.width / 2 + gap * 2, this.canvas.height / 1.59, platformWidth * 3, 25), 
-      new Platform(this.canvas.width / 2 + gap * 4, this.canvas.height / 1.78 - gap, platformWidth, 25), 
-      new Platform(this.canvas.width / 2 + gap * 7, this.canvas.height / 2.8 - gap, platformWidth, 25), 
-      new Platform(this.canvas.width / 2 + gap * 12, this.canvas.height / 4 - gap, platformWidth, 25), 
-      new Platform(this.canvas.width / 2 + gap * 17, this.canvas.height / 5 - gap, platformWidth* 0.5, 25),
-      new Platform(this.canvas.width / 2 + gap * 16, this.canvas.height / 2 - gap * 1.4, platformWidth* 0.3, 25), 
-      new Platform(this.canvas.width / 2 + gap * 19.4, this.canvas.height / 2 - gap * 4, platformWidth* 0.3, 25), 
-      new Platform(this.canvas.width / 2 + gap * 14, this.canvas.height / 2 - gap*0.1, platformWidth, 25, 'red'), 
-      new Platform(this.canvas.width / 2 + gap * 24, this.canvas.height / 2 - gap * 4, platformWidth, 25), 
-      new Platform(this.canvas.width / 2 + gap * 27, this.canvas.height / 2 - gap * 5.3, platformWidth*0.5, 25), 
-      new Platform(this.canvas.width / 2 + gap * 27.7, this.canvas.height / 2 - gap * 6.8, platformWidth*0.5, 25),
-      new Platform(this.canvas.width / 2 + gap * 27, this.canvas.height / 2 - gap * 8.2, platformWidth*0.5, 25), 
-      new Platform(this.canvas.width / 2 + gap * 27.7, this.canvas.height / 2 - gap * 9.7, platformWidth*0.5, 25), 
-      new Platform(this.canvas.width / 2 + gap * 32, this.canvas.height / 2 - gap * 10, platformWidth*1.5, 25), 
-      new Platform(this.canvas.width / 2 + gap * 16, this.canvas.height / 2 - gap * -2.3, platformWidth, 25), 
-      new Platform(this.canvas.width / 2 + gap * 13, this.canvas.height / 2 - gap * -1, platformWidth * 0.5, 25), 
-      new Platform(this.canvas.width / 2 + gap * 20, this.canvas.height / 2 - gap * -3.3, platformWidth * 0.5, 25),
+      new Platform(940, 430, 600, 25),
+      new Platform(1150, 284, 200, 25),
+      new Platform(1445, 139, 200, 25),
+      new Platform(1945, 70, 200, 25),
+      new Platform(2445, 35, 100, 25),
+      new Platform(2685, -60, 60, 25),
+      new Platform(2340, 200, 60, 25), 
+      new Platform(2143, 330, 200, 25), 
+      new Platform(3145, -60, 200, 25), 
+      new Platform(3445, -190, 100, 25),
+      new Platform(3510, -340, 100, 25),
+      new Platform(3445, -480, 100, 25),
+      new Platform(3515, -630, 100, 25),
+      new Platform(3945, -660, 300, 25), 
+      new Platform(2350, 570, 200, 25), 
+      new Platform(2040, 440, 100, 25), 
+      new Platform(2740, 670, 100, 25),
        
      
       //platforms on the right
-      new Platform(this.canvas.width / 2 - platformWidth - gap * 8, this.canvas.height / 2 - gap * 3, platformWidth * 1.5, 25,'pruple'), // Wider gap, longer platform
-      new Platform(this.canvas.width / 2 - platformWidth - gap * 6, this.canvas.height / 2 - gap * 2, platformWidth, 25, 'red'), // Wider gap, lower position
-      new Platform(this.canvas.width / 2 - platformWidth - gap * 3.7, this.canvas.height / 1.65, platformWidth * 1.5, 25), // Longer platform
-      new Platform(this.canvas.width / 2 - platformWidth - gap * 10, this.canvas.height / 2 - gap * 4, platformWidth * 2, 25), // Wider gap, longer platform
-      new Platform(this.canvas.width / 2 - platformWidth - gap * 12, this.canvas.height / 2 - gap * 5, platformWidth * 1.5, 25), // Wider gap, lower position, longer platform
+      new Platform(200, 400, 200, 25),
+      new Platform(-10, 250, 60, 25),
+      new Platform(-400, 150, 140, 25),
+      new Platform(-800, 60, 50, 25),
+      new Platform(-1000, 210, 50, 25),
+      new Platform(-1330, 330, 40, 25),
+      new Platform(-1490, 470, 60, 25),
+      new Platform(-1540, 530, 60, 25),
+      new Platform(-2000, 600, 130, 25),
+      new Platform(-1470, -50, 370, 25),
+      new Platform(-1390, -190, 200, 25),
+      new Platform(-1320, -320, 60, 25),
+      
+  
     ];
 
     for (const platform of platforms) {
@@ -60,34 +73,21 @@ class Level extends Game {
     // Add the player UI object to the game
     this.addGameObject(new PlayerUI(10, 10));
 
-    // Creating an infinite platform and add it to the game
-    this.infinitePlatform = new Platform(this.canvas.width / 10, this.canvas.height / 2 - gap * -5, platformWidth * 2000, 25);
-    this.addGameObject(this.infinitePlatform);
-
     // Create enemies and add them to the game
-    this.addGameObject(new Enemy(this.canvas.width / 2 - platformWidth - gap * 3.7, this.canvas.height / 1.65, platformWidth * 1.5, 25));
-    this.addGameObject(new Enemy(this.canvas.width / 2 + gap * 2, this.canvas.height / 1.59, platformWidth * 4, 25));
-    this.addGameObject(new Enemy(this.canvas.width / 2 + gap * 4.6, this.canvas.height / 1.59, platformWidth * 4, 25));
+    this.addGameObject(new Enemy(940, 430, 600, 25));
+    this.addGameObject(new Enemy(1300, 430, 600, 25));
+    this.addGameObject(new Enemy(2143, 330, 200, 25));
+    this.addGameObject(new Enemy(-1320, -50, 370, 25));
+    this.addGameObject(new Enemy(-1390, -190, 200, 25));
+    this.addGameObject(new Enemy(4055, -660, 300, 25));
 
     // Create collectibles and add them to the game
-    this.addGameObject(new Collectible(2785, 740 - 100, 20, 20));
-    this.addGameObject(new Collectible(4100, -610 -100, 20, 20));
-    this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
-    this.addGameObject(new Collectible(450, 500 - 100, 20, 20));
+    this.addGameObject(new Collectible(2785, 640, 20, 20));
+    this.addGameObject(new Collectible(4100, -690, 20, 20));
+    this.addGameObject(new Collectible(-1300, -350, 20, 20));
+    this.addGameObject(new Collectible(-1980, 560, 20, 20));
   }
 
-  update(deltaTime) {
-    // Move the infinite platform to the left
-    this.infinitePlatform.x -= 5;
-
-    // If the infinite platform has moved off the screen, reset its position to the right side of the screen
-    if (this.infinitePlatform.x + this.infinitePlatform.width < 0) {
-      this.infinitePlatform.x = this.canvas.width;
-    }
-
-    // Call the superclass's update method to update the rest of the game objects
-    super.update(deltaTime);
-  }
   
 }
 

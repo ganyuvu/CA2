@@ -1,9 +1,7 @@
-// Import the Component parent class.
 import Component from './component.js';
 
 // Define the UI class which extends the Component parent class.
 class UI extends Component {
-  // The constructor of the UI class.
   constructor(text, x, y, font = '20px Arial', color = 'white', textAlign = 'left', textBaseline = 'top') {
     super(); // Call the constructor of the parent class.
 

@@ -1,13 +1,10 @@
-// The required modules and classes are imported at the top of the script.
 import GameObject from './gameobject.js';
 import Particle from './particle.js';
 import Physics from '../engine/physics.js';
 
 // The ParticleSystem class extends GameObject and is responsible for creating and managing a system of particles.
 class ParticleSystem extends GameObject {
-  // The constructor method initializes a new instance of the ParticleSystem class.
   constructor(x, y, color, count, lifeDuration, emitDuration) {
-    // Call the constructor of the parent class (GameObject) and pass the position of the particle system.
     super(x, y);
     // Initialize instance properties.
     this.color = color; // Color of the particles.

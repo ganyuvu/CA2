@@ -1,4 +1,3 @@
-// Import the required modules and classes.
 import Platform from '../game/platform.js';
 import Component from './component.js';
 import Renderer from './renderer.js';
@@ -19,12 +18,11 @@ class Physics extends Component {
     this.velocity.x += this.acceleration.x * deltaTime;
     this.velocity.y += (this.acceleration.y + this.gravity.y) * deltaTime;
 
-    //Copilot helped me with the code below
-
     const platforms = this.gameObject.game.gameObjects.filter((obj) => obj instanceof Platform); // Get all platforms in the game
-    //Win Variable
-    this.Win = false;
 
+     //Copilot helped me with the win condition and I used the same logic for the death condition
+    this.Win = false;
+    this.Dead = false;
     this.IsGrounded = false;
     
     // Check if the game object is colliding with any of the platforms.
@@ -48,11 +46,16 @@ class Physics extends Component {
             this.IsGrounded = true;
             this.velocity.y = 0;
           }
+          // Check if the game object is colliding with the starting platform
           if(obj.isStartingPlatform)
             {
-              this.Win = true;
-              //console.log("You Win");
+              this.Win = true; // If it is, set the win flag to true, which will be checked in player class
             }
+          // Check if the game object is colliding with the floor
+          if(obj.isHittingFloor)
+          {
+            this.Dead = true;
+          }
         }
       }
     }

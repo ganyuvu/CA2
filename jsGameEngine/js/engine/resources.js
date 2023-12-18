@@ -11,6 +11,7 @@ const AudioFiles = {
   collect: new Audio(),
   win: new Audio(),
   lose: new Audio(),
+  background: new Audio(),
 };
 
 // Set the source of the audio files.
@@ -18,6 +19,7 @@ AudioFiles.jump.src = './resources/Audio/jumpSound1.mp3';
 AudioFiles.collect.src = './resources/Audio/coinSound.mp3';
 AudioFiles.win.src = './resources/Audio/winSound.mp3';
 AudioFiles.lose.src = './resources/Audio/loseSound.mp3';
+AudioFiles.background.src = './resources/Audio/spaceTheme.mp3';
 
 // Set the source of the player image.
 //Images.player.src = './resources/images/player/player.png'; // Update the image path
